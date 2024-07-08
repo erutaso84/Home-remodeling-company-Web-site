@@ -1,0 +1,992 @@
+@charset "utf-8";
+
+@media screen and (max-width: 768px)
+{
+    .gMenu {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        font-family:  Noto Serif JP;
+        font-size: 16px;
+      }
+      /* メニューアイコンを画面右上に固定しています */
+      .gMenu .menuIcon {
+        cursor: pointer;
+        position: absolute;
+        right: 3px;
+        top: 10px;
+        height: 12px;
+        margin: 0 12px 15.71px 0;
+      }
+      /* メニューアイコン（三本線）の真ん中の線です */
+      .gMenu .menuIcon .navicon {
+        background: #ffc107; /* 色は自由に変更可能です */
+        display: block;
+        height: 2px; /* 太さ */
+        width: 31px; /* 長さ */
+        position: relative;
+        transition: background .4s ease-out; /* 形が変わる時のアニメーション */
+      }
+      /* メニューアイコン（三本線）の上と下の線を疑似要素で追加 */
+      .gMenu .menuIcon .navicon::before,
+      .gMenu .menuIcon .navicon::after {
+        background: #ffc107; /* 色は自由に変更可能です */
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all .4s ease-out; /* 形が変わる時のアニメーション */
+        width: 100%;
+      }
+      .gMenu .menuIcon .navicon::before {top: 10px;} /* 位置を上にずらしています */
+      .gMenu .menuIcon .navicon::after {top: -10px;} /* 位置を下にずらしています */
+      /* 表示されるメニューです */
+      .gMenu .menu {
+        background-color: rgba(255,255,255,0.9);
+        overflow: hidden;
+        max-height: 0; /* ★最初は高さを0にして非表示状態に */
+        transition: max-height .6s; /* 表示されるときのアニメーション */
+        text-align: center;
+        z-index: 100px;
+      }
+      /* メニュー部分のデザインです */
+      .gMenu .menu li:first-of-type {
+        padding-top: 48px;
+      }
+      .gMenu .menu li a {
+        display: block;
+        padding: 24px 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .gMenu .menu li a:hover {
+        background-color: #f4f4f4;
+      }
+      /* チェックボックスは常に非表示です */
+      .gMenu .menuBtn {
+        display: none;
+      }
+      /* ▼▼▼以下はチェックボックスがONの時の状態です▼▼▼ */
+      .gMenu .menuBtn:checked ~ .menu {
+        max-height: 532px; /* ★チェックボックスがオンの時高さを338pxにして表示させます */
+        transition: max-height .6s;
+      }
+      /* メニューボタンの中央の線を非表示に */
+      .gMenu .menuBtn:checked ~ .menuIcon .navicon {background: transparent;}
+      
+      /* メニューボタンの上下の線を45度傾けて✕印を作ります */
+      .gMenu .menuBtn:checked ~ .menuIcon .navicon::before {transform: rotate(-45deg);top: 0;}
+      .gMenu .menuBtn:checked ~ .menuIcon .navicon::after {transform: rotate(45deg);top: 0;}
+      /* サイトに合わせてオリジナルカスタマイズ */
+      .gMenu .menuIcon {
+        top: 26px;
+      }
+      .gMenu .menuIcon .navicon,
+      .gMenu .menuIcon .navicon::before,
+      .gMenu .menuIcon .navicon::after {
+        background: #B71B26;
+      }
+      li:last-child {
+        padding-bottom: 180px;
+      }
+      .menu li a:hover{
+        color: #B71B26;
+      }
+}
+
+  header{
+    width: 100%; /* 幅いっぱいを指定 */
+    height: 51.71px; /* 高さを50pxに指定 */
+    background: #ffffff; /* 背景色にグレーを指定 */
+    padding: 20px 50px; /* ヘッダーに上下左右それぞれ余白を指定 */
+    box-sizing: border-box; /* padding分を含んで幅を100%にするため */
+    position: fixed; /* ウィンドウを基準に画面に固定 */
+    top: 0; /* 上下の固定位置を上から0pxにする */
+    left: 0; /* 左右の固定位置を左から0pxにする */
+    display: flex; /* 中の要素を横並びにする */
+    justify-content: center;
+    z-index: 100;
+  }
+
+
+  
+h1{
+    width: 240px;
+    height: 19.71px;
+    margin: 16px 123px 16px 12px;
+    display: flex;
+    flex-basis: auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.pc { display: none !important; }
+.sp {
+    display: block !important; 
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: 0 10%;
+    margin-bottom: 48px;
+    margin-top: 51.71px;
+}
+h2{
+    font-family: Noto Serif JP;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+h3{
+    font-family: Noto Sans JP;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+h4{
+    font-family: Noto Serif JP;
+    font-size: 20px;
+    text-align: center;
+    margin: 8px 0;
+}
+.contentTitle p{
+    text-align: center;
+    font-family: Noto Serif JP;
+    font-size: 12px;
+    color: #223E69;
+    margin: 8px 8px 24px 8px;
+    align-items: center; /* 横線を上下中央 */
+    display: flex; /* 文字と横線を横並び */
+    justify-content: center; /* 文字を中央寄せ */
+}
+.contentTitle p::before,
+.contentTitle p::after {
+  background-color: #223E69; /* 横線の色 */
+  content: "";
+  height: 0.01; /* 横線の高さ */
+  width: 60.5px; /* 横線の長さ */
+  border-top: 1px solid;
+}
+.contentTitle p::before {
+  margin-right: 8px; /* 文字との余白 */
+}
+.contentTitle p::after {
+  margin-left: 8px; /* 文字との余白 */
+}
+.conseptSec{
+    margin-bottom: 80px;
+}
+.moreBtn::after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 6px;
+    border-color: transparent transparent transparent #333;
+    position: absolute;
+    top: 0.8px;
+    left: 52px;
+    bottom: 2.5px;
+    margin: auto;
+}
+.moreBtn{
+    position: relative;
+    display: inline-block;
+    padding-left: 12px;
+    font-family: Noto Sans JP;
+    font-size: 14px;
+    margin: 8px 20.75px 48px 308.25px;
+}
+.moreBtn {
+  padding-bottom: 5px;
+  position: relative;
+}
+.moreBtn::before {
+  background: #333333;
+  content: '';
+  width: 54.75px;
+  height: 1.5px;
+  position: absolute;
+  left: 6px;
+  bottom: 4px;
+  margin: auto;
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: transform .3s;
+}
+.moreBtn:hover::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+.mainExplanation p{
+    font-family: Noto Sans JP;
+    font-size: 14px;
+    margin: 0 12px;
+    letter-spacing: 0.11em;
+    line-height: 28px;
+}
+.surviceContent{
+  display: inline-block;
+  margin: auto;
+}
+.surviceContent img{
+  display: block;
+  width: 351px;
+  height: 246.29px;
+  margin:  auto;
+}
+
+.flowChart{
+    background-color: RGBA(34,62,105,5%);;
+    padding: 16px 0 16px 0;
+    text-align: center;
+}
+.flowTitle p{
+    text-align: center;
+    font-family: Noto Serif JP;
+    font-size: 12px;
+    color: #B71B26;
+    margin: 8px 8px 24px 8px;
+    align-items: center; /* 横線を上下中央 */
+    display: flex; /* 文字と横線を横並び */
+    justify-content: center; /* 文字を中央寄せ */
+}
+.flowTitle p::before,
+.flowTitle p::after {
+  background-color: #B71B26; /* 横線の色 */
+  content: "";
+  height: 0.1; /* 横線の高さ */
+  width: 60.5px; /* 横線の長さ */
+  border-top: 1px solid;
+}
+.flowTitle p::before {
+  margin-right: 8px; /* 文字との余白 */
+}
+.flowTitle p::after {
+  margin-left: 8px; /* 文字との余白 */
+}
+.flowChart li{
+    position: relative;
+    display: inline-block;
+    display: list-item;
+    color: #FFFFFF;
+    background-color: #333333;
+    width: 300px;
+    height: 32px;
+    font-family: Noto Sans JP;
+    font-size: 16px;
+    padding: 8px 0 8px 0;
+    border-radius: 32px;
+    margin: 0 auto;
+}
+.flowChart li{
+    margin-bottom: 32px;
+  }
+.flowChart li:last-child {
+    margin-bottom: 0;
+  }
+
+.triangle1::after,.triangle2::after,.triangle3::after,.triangle4::after,.triangle5::after{
+    content: " ";
+    border-style: solid;
+    border-color:  #B71B26 transparent transparent transparent;
+    border-width: 16px ;
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    left: 135px;
+    top: 40px;
+}
+.triangle1::after{
+  filter: opacity(60%);
+}
+.triangle2::after{
+  filter: opacity(70%);
+}
+.triangle3::after{
+  filter: opacity(80%);
+}
+.triangle4::after{
+  filter: opacity(90%);
+}
+
+
+.questionSec{
+    margin: 80px 12px 80px;
+}
+.question1{
+    margin-bottom: 24px;
+    font-family: Noto Sans JP;
+    font-size: 16px;
+}
+.question2{
+    font-family: Noto Sans JP;
+    font-size: 16px;
+}
+.question2 .question{
+    margin-bottom: 16px;
+}
+.question1 p,
+.question2 p{
+    letter-spacing: 0.09em;
+    display: flex;
+    align-items: baseline;
+}
+.question::before{
+    content: "Q.";
+    width: 36px;
+    height: 36px;
+    background-color: #333333;
+    color: #FFFFFF;
+    font-family: Noto Serif JP;
+    font-weight: bold;
+    border-radius: 52%;
+    font-size: 20px;
+    padding: 5.11px 1px 10.89px 9px;
+    margin-right: 10px;
+    margin-bottom: 16px;
+    position: relative;
+}
+.answer::before{
+    content: "A.";
+    width: 36px;
+    height: 36px;
+    background-color: #B71B26;
+    color: #FFFFFF;
+    font-family: Noto Serif JP;
+    font-weight: bold;
+    border-radius: 52%;
+    font-size: 20px;
+    padding: 5px 1px 11px 9px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.formSec{
+    background-color: RGBA(34,62,105,15%);
+    margin-bottom: 172.02px;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    text-align: center;
+}
+.formSub p{
+      text-align: center;
+      font-family: Noto Serif JP;
+      font-size: 12px;
+      color: #333333;
+      margin: 8px 8px 24px 8px;
+      align-items: center; /* 横線を上下中央 */
+      display: flex; /* 文字と横線を横並び */
+      justify-content: center; /* 文字を中央寄せ */
+}
+.formSub p::before,
+.formSub p::after {
+  background-color: #333333; /* 横線の色 */
+  content: "";
+  height: 0.1; /* 横線の高さ */
+  width: 60.5px; /* 横線の長さ */
+  margin-left: 8px;
+  margin-right: 8px;
+  border-top: 1px solid;
+}
+.formsec p{
+  margin-bottom: 24px;
+}
+.formContent{
+    font-family: Noto Sans JP;
+    font-size: 16px;
+    font-weight: bold;
+}
+.formContent label{
+    font-weight: 400;
+    text-align: center;
+    margin: 0 20px 0 20px;
+    padding-bottom: 20px;
+    display: inline-block;
+}
+.required{
+    font-family: Noto Sans JP;
+    font-size: 10px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #B71B26;
+    width: 40px;
+    height: 18px;
+    display: inline-block;
+    padding: 2.5px 9.5px 3px 9.5px;
+    border-radius: 8px;
+    margin-left: 4px;
+    margin-bottom: 8px;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea{
+    border: 1px solid #FFFFFF;
+    width: 351px;
+    height: 30px;
+    padding: 4px 8px;
+    background-color: #FFFFFF;
+}
+@media screen and (max-width: 768px){
+.postMark{
+    font-family: Noto Sans JP;
+    font-size: 14px;
+    margin: 8px 8px 16px 12px;
+    float: inline-start;
+}
+input[name="postNumber"]{
+    width:125px;
+    height: 30px;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+    padding: 0 8px;
+    margin-bottom: 8px;
+    float: inline-start;
+}
+.formSec .postCode{
+  margin: 0;
+}
+.requiredType{
+  margin-left: 94.5px;
+  margin-right: 94.5px;
+}
+.name,.kana,.phone,.postAddress,.mailAddress.mailConfirm,.inquiry{
+  margin-left: 12px;
+  margin-right: 12px;
+}}
+input[name="userName"],input[name="hurigana"],input[type="tel"],input[type="email"],input[name=post]{
+  margin-bottom: 20px;
+}
+
+textarea{
+    width: 351px;
+    height: 120px;
+    margin-top: 8px;
+    resize: none;
+}
+.submitBtn::before{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 6px;
+    border-color: transparent transparent transparent #FFFFFF;
+    position: absolute;
+    top: 1px;
+    left: 174px;
+    bottom: 0px;
+    margin: auto;
+}
+.submitBtn{
+    position: relative;
+    color:#FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Noto Serif JP;
+    background-color: #333333;
+    width: 200px;
+    height: 48px;
+    display: inline-block;
+    text-align: center;
+    margin: 24px 87.5px 0 87.5px;
+}
+.submitBtn p{
+    margin: 16px 26.5px 16px 16.5px;
+}
+::placeholder{
+  color: RGBA(34, 62, 105, 45%);
+}
+
+@media screen and (max-width: 768px){
+.pagetop{
+  display: block;
+  width: 47px;
+  height: 47px;
+  box-sizing: border-box;
+  background: #333333;
+  border: 1px solid #333333;
+  padding-top: 30px;
+  text-align: center;
+  letter-spacing: -1px;
+  font-size: 85%;
+  text-decoration: none;
+  color: #333333;
+  position: relative;
+    left: 85%;
+    top: 1px;
+}
+.pagetop::before{
+  content: "";
+  display: block;
+  border-top: 2px solid #FFFFFF;
+  border-right: 2px solid #FFFFFF;
+  width: 60%;
+  height: 60%;
+  top: 15px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  transform: rotate(-45deg);
+}
+}
+
+footer{
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 12px;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer span{
+    font-size: 10px;
+}
+
+#concept,#survice,#flow,#contact{
+  padding-top: 60px;
+  margin-top:-60px;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+@media screen and (min-width: 768px){
+    .sp {display: none !important;}
+    .pc { display: block !important; 
+        width: 100%;
+        height: 545px;
+        object-fit: cover;
+        object-position: 0 10%;
+        margin-bottom: 160px;
+        margin-top: 72.85px;}
+    header{
+      justify-content: normal;
+      width: 100%;
+      height: 32.85px;
+      padding: 34px 24px 34px 24px;
+    } 
+    h1{
+      margin-right: 225px;
+      width: 400px;
+      height: 32.85px;
+    }
+    header nav ul{
+      display: flex;
+      position: fixed;
+      right:24px;
+      top: 27.42px;
+    }
+    header nav ul a:hover{
+      color: #B71B26;
+    }
+    .gMenu .menu-btn {
+      display: none;
+    }
+    header li a{
+      font-family: Noto Serif JP;
+      font-size: 16px;
+      margin-left: 40px;
+      padding: 8.42px 0 8.42px 0;  
+    }
+    .gMenu{
+      display: flex;
+    }
+    .conseptSec,.surviceSec,.questionSec{
+      margin: 0 auto;
+      margin: 0 173px 0 173px;
+    }
+    h2{
+      font-size: 42px;
+    }
+    .contentTitle p{
+      font-size: 16px;
+      margin: 16px 8px 48px 8px;
+    }
+    h3{
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    .mainExplanation p{
+      font-size: 16px;
+      letter-spacing: 1.3;
+    }
+    .conseptSec .mainExplanation p{
+      width: 1020px;
+      margin: auto;
+    }
+    .conseptSec{
+      margin-bottom: 160px;
+    }
+    .bath img,.living img,.kitchen img{
+      width: 300px;
+      height: 210.51px;
+      object-fit: cover;
+    }
+    h4{
+      font-size: 24px;
+      margin: 16px 0 16pa 0;
+    }
+    .bath,.living,.kitchen{
+      width: 300px;
+      height: 351.51px;
+      display: inline-block;
+      box-sizing: border-box;
+    }
+    .surviceContent{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .surviceContent p{
+      font-size: 16px;
+      letter-spacing: 0.01em;
+    }
+    .bath{
+      margin-right: 60px;
+      margin-bottom: 160px;
+    }
+    .kitchen{
+      margin-left: 60px;
+    }
+    .moreBtn{
+      position: relative;
+      display: inline-block;
+      padding-left: 12px;
+      font-family: Noto Sans JP;
+      font-size: 16px;
+      margin: 16px 20.75px 48px 235.25px;
+  }
+  .moreBtn::after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4.5px 0 4.5px 6.5px;
+    border-color: transparent transparent transparent #333;
+    position: absolute;
+    top: 0.8px;
+    left: 58px;
+    bottom: 0.25px;
+    margin: auto;
+  }
+  .moreBtn::before {
+    background: #333333;
+    content: '';
+    width: 54.75px;
+    height: 1.5px;
+    position: absolute;
+    left: 8.5px;
+    bottom: 4px;
+    margin: auto;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform .3s;
+  }
+  
+  .flowChart li{
+    display: inline-block;
+  }
+  .flowChart{
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .flowTitle p{
+    margin-top: 16px;
+    margin-bottom: 48px;
+    font-size: 16px;
+  }
+.flowChart ul li{
+  font-size: 28px;
+  width: 60px;
+  height: 280px;
+  margin-right: 112px;
+  text-align: center;
+  writing-mode: vertical-rl;
+  padding:0 12.5px 0 16px;
+}
+.flowChart li:last-child {
+  margin-right: 0;
+  margin-bottom: 32px;
+}
+.flowChart ul{
+  margin: auto;
+  padding: 0;
+}
+.triangle1::after,.triangle2::after,.triangle3::after,.triangle4::after,.triangle5::after{
+  content: " ";
+  border-style: solid;
+  border-color:  #B71B26 transparent transparent transparent;
+  border-width: 30px ;
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  left: 110px;
+  top: 110px;
+  transform:rotate(270deg);
+}
+
+
+    .questionSec{
+      margin-top: 100px;
+      margin-bottom: 160px;
+    }
+    .question::before{
+      content: "Q.";
+      width: 52px;
+      height: 52px;
+      background-color: #333333;
+      color: #FFFFFF;
+      font-family: Noto Serif JP;
+      font-weight: bold;
+      border-radius: 52%;
+      font-size: 34px;
+      padding: 3.64px 0.5px 19.36px 9px;
+      margin-right: 10px;
+      margin-bottom: 16px;
+      position: relative;
+  }
+  .answer::before{
+      content: "A.";
+      width: 52px;
+      height: 52px;
+      background-color: #B71B26;
+      color: #FFFFFF;
+      font-family: Noto Serif JP;
+      font-weight: bold;
+      border-radius: 52%;
+      font-size: 34px;
+      padding: 3.64px 0.5px 19.36px 9px;
+      margin-right: 10px;
+      position: relative;
+  }
+  .question1{
+    margin: auto;
+    margin-bottom: 58px;
+    font-family: Noto Sans JP;
+    font-size: 20px;
+    width: 1020px;
+    letter-spacing: 1em;
+}
+.question2{
+  margin: auto;
+    font-family: Noto Sans JP;
+    font-size: 20px;
+    width: 1020px;
+}
+    
+    .formSec{
+      background-color: RGBA(34,62,105,15%);
+      width: 100%;
+      padding-top: 48px;
+      padding-bottom: 48.36px;
+    }
+    .formContent{
+      background-color:RGBA(255,255,255,50%);
+      width: 1020px;
+      padding-bottom: 48px;
+      padding-top: 48px;
+      display: inline-block;
+      font-size: 20px;
+    }
+    .formContent br{
+      display: none;
+    }
+    .formsub p{
+      font-size: 16px;
+      margin-top: 16px;
+      margin-bottom: 47.64px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea{
+    border: 1px solid #FFFFFF;
+    width: 332px;
+    height: 52px;
+    background-color: #FFFFFF;
+    text-align: start;
+    vertical-align: baseline;
+    }
+    textarea{
+      width: 664px;
+      height: 208px;
+      margin-top: 0;
+      margin-left: 78px;
+      vertical-align: top;
+    }
+    .postMark{
+      font-family: Noto Sans JP;
+      font-size: 14px;
+      margin: 8px 8px 16px 12px;
+    }
+    input[name="postNumber"]{
+      width: 222px;
+      height: 52px;
+      border: 1px solid #FFFFFF;
+      background-color: #FFFFFF;
+      padding: 0 8px;
+      margin-bottom: 8px;
+      right: auto;
+    }
+    input[name="post"]{
+      margin: 0 auto;
+    }
+    input[type="email"]{
+      width: 664px;
+      height: 52px;
+    }
+    input[name="post"]{
+      width: 664px;
+      height: 52px;
+    }
+    .postMark{
+      font-family: Noto Sans JP;
+      font-size: 20px;
+      margin: 15.36px 4px 16.64px 0px;
+  }
+  .required{
+    font-family: Noto Sans JP;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #B71B26;
+    width: 58px;
+    height: 24px;
+    display: inline-block;
+    padding: 3px 12px 5px 12px;
+    border-radius: 8px;
+    margin-right: 12px;
+    margin-left: 8px;
+  }
+  input[name="attend"]{
+    width: 1.2em;
+    height: 1.2em;
+  }
+  .formContent label{
+    margin: 0 20px 0 0;
+  }
+  .inquiryType{
+    width: 518px;
+    height: 24px;
+    margin-left: 70px;
+  }
+  .name{
+    width: 476px;
+    height: 52px;
+    margin-left: 190px;
+  }
+  .kana,.phone{
+    width: 496px;
+    height: 52px;
+    margin-left: 168px;
+  }
+  .postCode{
+    width: 374px;
+    height: 52px;
+    margin-left: 206px;
+  }
+  .postAddress{
+    width: 664px;
+    height: 52px;
+    margin-left: 332px;
+  }
+  .mailAddress{
+    width: 894px;
+    height: 52px;
+    margin-left: 108px;
+  }
+  .mailConfirm{
+    width: 980px;
+    height: 52px;
+    margin-left: 27px;
+  }
+  .inquiry{
+    width: 916px;
+    height: 208px;
+    margin-left: 86px;
+  }
+  .formContent p{
+    margin-bottom: 24px;
+  }
+  input[type="radio"]{
+    vertical-align: -4.5px;
+  }
+  
+    
+    .submitBtn::before{
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 0 8px 10px;
+      border-color: transparent transparent transparent #FFFFFF;
+      position: absolute;
+      top: 29px;
+      left: 248px;
+      bottom: 0px;
+      margin: 0 auto;
+  }
+  .submitBtn{
+      position: relative;
+      color:#FFFFFF;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: Noto Serif JP;
+      background-color: #333333;
+      width: 300px;
+      height: 68px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      margin-top: 48px;
+  }
+  .submitBtn p{
+      margin: 24px 43.5px 23px 43px;
+  }
+
+
+  .pagetop{
+    display: block;
+    width: 62px;
+    height: 62px;
+    box-sizing: border-box;
+    background: #333333;
+    border: 1px solid #333333;
+    padding-top: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+    font-size: 85%;
+    text-decoration: none;
+    color: #333333;
+    position: relative;
+      top: 1px;
+      left: 93%;
+  }
+  .pagetop::before{
+    content: "";
+    display: block;
+    border-top: 2px solid #FFFFFF;
+    border-right: 2px solid #FFFFFF;
+    width: 50%;
+    height: 50%;
+    top: 23px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    transform: rotate(-45deg);
+  }
+
+    footer{
+      width: 100%;
+      height: 62px;
+      font-size: 14px;
+    }
+}
